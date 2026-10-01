@@ -1,0 +1,29 @@
+name: PimpBunny
+# Scene scraper for pimpbunny.com.
+#
+# Scrapes the title, the site's own thumbnail and the canonical URL, all from
+# the page's Open Graph tags.
+#
+# Deliberately left out:
+#   * Date: the page only exposes when the video was *added to this site*, not
+#     when it was originally made, so it would be wrong rather than missing.
+#   * Performers: the page names the model, but a name returned here is created
+#     in Stash as a bare local performer when it is not already known. Matching
+#     against StashDB or ThePornDB is left to whatever does it exactly and links
+#     the performer by stash_ids.
+#   * Description: the page carries a generic site blurb, not one per video.
+#
+# The site answers 403 to Python's default user agent but serves Stash's Go
+# client normally, so no custom driver headers are needed.
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - pimpbunny.com/
+    scraper: sceneScraper
+xPathScrapers:
+  sceneScraper:
+    scene:
+      Title: //meta[@property="og:title"]/@content
+      URL: //meta[@property="og:url"]/@content
+      Image: //meta[@property="og:image"]/@content
+# Last Updated October 01, 2026
