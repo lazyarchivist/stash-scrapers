@@ -20,6 +20,28 @@ sceneByURL:
     url:
       - pimpbunny.com/
     scraper: sceneScraper
+# Scrapes a scene from the pimpbunny.com URL it already has, so that Identify
+# and the Scene Tagger can update many scenes at once (they only scrape by
+# fragment, never by URL).
+#
+# A scene whose URL is from another site gets an empty query URL, so that it
+# fails without fetching that site: its Open Graph tags would otherwise be
+# taken as this scene's title and cover.
+sceneByFragment:
+  action: scrapeXPath
+  queryURL: "{url}"
+  queryURLReplace:
+    url:
+      # Mark a pimpbunny.com video page, normalised to https without "www."...
+      - regex: ^https?://(?:www\.)?pimpbunny\.com/videos/
+        with: "ok https://pimpbunny.com/videos/"
+      # ...blank out anything left unmarked...
+      - regex: ^[^o].*$|^o[^k].*$
+        with: ""
+      # ...and drop the mark.
+      - regex: "^ok "
+        with: ""
+  scraper: sceneScraper
 xPathScrapers:
   sceneScraper:
     scene:

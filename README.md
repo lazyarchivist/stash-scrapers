@@ -3,9 +3,9 @@
 Scrapers for [Stash](https://github.com/stashapp/stash), published as a scraper
 source that Stash installs and updates on its own.
 
-| Scraper | Site | Scrapes |
-|---|---|---|
-| PimpBunny | pimpbunny.com | title, thumbnail, URL |
+| Scraper | Site | Scrapes | Works with |
+|---|---|---|---|
+| PimpBunny | pimpbunny.com | title, thumbnail, URL | Scrape by URL, Identify, Scene Tagger (from the scene's pimpbunny.com URL) |
 
 ## Using this source in Stash
 
